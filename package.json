@@ -1,0 +1,34 @@
+{
+  "name": "job-posting-challenge",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:seed": "npx prisma db seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Sufiane/job-posting-challenge.git"
+  },
+  "author": "Sufiane Souissi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sufiane/job-posting-challenge/issues"
+  },
+  "homepage": "https://github.com/Sufiane/job-posting-challenge#readme",
+  "description": "",
+  "prisma": {
+    "schema": "./db/schema.prisma",
+    "seed": "ts-node db/seeding/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "5.11.0",
+    "express": "4.19.2",
+    "prisma": "5.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.30",
+    "ts-node": "10.9.2",
+    "typescript": "5.4.3"
+  }
+}

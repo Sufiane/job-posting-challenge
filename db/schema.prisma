@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model JobDescription {
+  id                  Int     @id @default(autoincrement())
+  text                String
+  hasResponsibilities Boolean @map("has_responsibilities")
+  hasBenefits         Boolean @map("has_benefits")
+  requireEducation    Boolean @map("require_education")
+  requireExperience   Boolean @map("require_experience")
+  isSoft              Boolean @map("is_soft")
+  isTech              Boolean @map("is_tech")
+
+  @@map("job_description")
+}
