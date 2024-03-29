@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser';
 
 import { db } from './db';
 
@@ -7,6 +8,7 @@ import { router } from './api'
 const app = express()
 const port = 7777
 
+app.use(bodyParser.json())
 
 async function start() {
     // Making sure we're connected to the db before starting
