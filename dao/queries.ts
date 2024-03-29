@@ -29,3 +29,11 @@ export async function update(id: number, payload: UpdatePayload): Promise<void> 
         },
     })
 }
+
+export async function deleteJobDescription(id: number): Promise<void> {
+    await db.jobDescription.delete({
+        where: {
+            id,
+        },
+    })
+}
