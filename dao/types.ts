@@ -6,12 +6,14 @@ export type JobDescription = Prisma.JobDescriptionGetPayload<{
     select: typeof fullSelect
 }>
 
-export interface UpdatePayload {
-    text?: string
-    isSoft?: boolean,
-    isTech?: boolean,
-    hasBenefits?: boolean,
-    hasResponsibilities?: boolean,
-    requireEducation?: boolean,
-    requireExperience?: boolean,
+export interface UpdatePayload extends Partial<CreatePayload> {}
+
+export interface CreatePayload {
+    text: string
+    isSoft: boolean,
+    isTech: boolean,
+    hasBenefits: boolean,
+    hasResponsibilities: boolean,
+    requireEducation: boolean,
+    requireExperience: boolean,
 }

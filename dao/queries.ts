@@ -1,5 +1,5 @@
 import { db } from '../db/'
-import { JobDescription, UpdatePayload } from './types';
+import { CreatePayload, JobDescription, UpdatePayload } from './types';
 
 export const fullSelect = {
     id: true,
@@ -35,5 +35,11 @@ export async function deleteJobDescription(id: number): Promise<void> {
         where: {
             id,
         },
+    })
+}
+
+export async function create(payload: CreatePayload): Promise<void> {
+    await db.jobDescription.create({
+        data: payload
     })
 }
