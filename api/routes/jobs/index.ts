@@ -24,8 +24,11 @@ const errorHandler = (res: Response, customErrorMessage: string, e: unknown) => 
 router.get('/:id', processRequest({
     params: paramsSchema,
 }), async (req, res) => {
+    const jobId = req.params.id
+
+    console.log(`Getting job ${jobId}`)
+
     try {
-        const jobId = req.params.id
 
         const jobDescription = await dao.getOne(jobId)
 
@@ -47,8 +50,11 @@ router.post('/:id', processRequest({
     params: paramsSchema,
     body: updateJobSchema,
 }), async (req, res) => {
+    const jobId = req.params.id
+
+    console.log(`updating job ${jobId}`)
+
     try {
-        const jobId = req.params.id
         const payload = req.body
 
         await dao.update(jobId, payload)
@@ -64,9 +70,11 @@ router.post('/:id', processRequest({
 router.delete('/:id', processRequest({
     params: paramsSchema,
 }), async (req, res) => {
-    try {
-        const jobId = req.params.id
+    const jobId = req.params.id
 
+    console.log(`deleting job ${jobId}`)
+
+    try {
         await dao.deleteJobDescription(jobId)
 
         return res
@@ -80,6 +88,8 @@ router.delete('/:id', processRequest({
 router.post('/', processRequest({
     body: createJobSchema,
 }), async (req, res) => {
+    console.log('creating new job')
+
     try {
         const payload = req.body
 
@@ -96,6 +106,8 @@ router.post('/', processRequest({
 router.get('/', processRequest({
     query: getJobsSchema,
 }), async (req, res) => {
+    console.log('getting job list')
+
     try {
         const filtering = {
             isSoft: req.query?.isSoft,
