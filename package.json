@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run db:seed",
     "start": "ts-node index.ts",
-    "db:seed": "npx prisma db seed"
+    "db:seed": "npx prisma db seed",
+    "top100Words": "ts-node ./scripts/top-100-words.ts"
   },
   "repository": {
     "type": "git",
