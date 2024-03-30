@@ -1,9 +1,9 @@
-import { Router, type Response, type Request, type NextFunction, RequestHandler } from 'express';
-import { validateRequest } from 'zod-express-middleware';
+import { Router, type Response } from 'express';
+import { processRequest, validateRequest } from 'zod-express-middleware';
 
 import dao from '../../dao'
 import { ValidationError } from './custom-error';
-import { createJobSchema, paramsSchema, updateJobSchema } from '../schemas';
+import { createJobSchema, getJobsSchema, paramsSchema, updateJobSchema } from '../schemas';
 
 export const router = Router()
 
@@ -90,5 +90,32 @@ router.post('/', validateRequest({
             .send('successfully created job description')
     } catch (e) {
         return errorHandler(res, 'Error while creating job description', e)
+    }
+})
+
+router.get('/', processRequest({
+    query: getJobsSchema,
+}), async (req, res) => {
+    try {
+        const filtering = {
+            isSoft: req.query?.isSoft,
+            isTech: req.query?.isTech,
+            hasBenefits: req.query?.hasBenefits,
+            hasResponsibilities: req.query?.hasResponsibilities,
+            requireEducation: req.query?.requireEducation,
+            requireExperience: req.query?.requireExperience,
+        }
+
+        const dbResult = await dao.get({
+            filtering,
+            sorting: req.query?.id,
+            skip: req.query?.skip,
+        })
+
+        return res
+            .status(200)
+            .send(dbResult)
+    } catch (e) {
+        return errorHandler(res, 'Error while getting list of job description', e)
     }
 })

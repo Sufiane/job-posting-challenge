@@ -40,6 +40,31 @@ export async function deleteJobDescription(id: number): Promise<void> {
 
 export async function create(payload: CreatePayload): Promise<void> {
     await db.jobDescription.create({
-        data: payload
+        data: payload,
+    })
+}
+
+export async function get({ filtering, sorting, skip }: {
+    skip?: number,
+    sorting?: 'asc' | 'desc',
+    filtering?: {
+        isSoft?: boolean
+        isTech?: boolean
+        hasBenefits?: boolean
+        hasResponsibilities?: boolean
+        requireEducation?: boolean
+        requireExperience?: boolean
+    }
+}): Promise<JobDescription[]> {
+    return db.jobDescription.findMany({
+        select: fullSelect,
+        take: 5,
+        skip: (skip ?? 0) * 5,
+        orderBy: {
+            id: sorting ?? 'asc',
+        },
+        where: {
+            ...filtering,
+        },
     })
 }
