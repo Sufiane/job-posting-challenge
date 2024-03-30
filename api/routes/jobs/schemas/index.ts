@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const paramsSchema = z.object({
-    id: z.number(),
+    id: z.coerce.number(),
 })
 
 export const createJobSchema = z.object({

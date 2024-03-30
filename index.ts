@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 
 import { db } from './db';
 
-import { router } from './api'
+import { jobsRoutes, translationRoutes } from './api'
 
 const app = express()
 const port = 7777
@@ -14,7 +14,8 @@ async function start() {
     // Making sure we're connected to the db before starting
     await db.$connect()
 
-    app.use('/', router)
+    app.use('/jobs', jobsRoutes)
+    app.use('/translation', translationRoutes)
 
     app.listen(port, () => {
         console.log('Project started')

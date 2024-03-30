@@ -1,9 +1,9 @@
 import { Router, type Response } from 'express';
-import { processRequest, validateRequest } from 'zod-express-middleware';
+import { processRequest } from 'zod-express-middleware';
 
-import dao from '../../dao'
-import { ValidationError } from './custom-error';
-import { createJobSchema, getJobsSchema, paramsSchema, updateJobSchema } from '../schemas';
+import dao from '../../../dao'
+import { ValidationError } from '../custom-error';
+import { createJobSchema, getJobsSchema, paramsSchema, updateJobSchema } from './schemas';
 
 export const router = Router()
 
@@ -21,7 +21,7 @@ const errorHandler = (res: Response, customErrorMessage: string, e: unknown) => 
         .send('An error occurred. Please contact the admin.')
 }
 
-router.get('/:id', validateRequest({
+router.get('/:id', processRequest({
     params: paramsSchema,
 }), async (req, res) => {
     try {
@@ -43,7 +43,7 @@ router.get('/:id', validateRequest({
     }
 })
 
-router.post('/:id', validateRequest({
+router.post('/:id', processRequest({
     params: paramsSchema,
     body: updateJobSchema,
 }), async (req, res) => {
@@ -61,7 +61,7 @@ router.post('/:id', validateRequest({
     }
 })
 
-router.delete('/:id', validateRequest({
+router.delete('/:id', processRequest({
     params: paramsSchema,
 }), async (req, res) => {
     try {
@@ -77,7 +77,7 @@ router.delete('/:id', validateRequest({
     }
 })
 
-router.post('/', validateRequest({
+router.post('/', processRequest({
     body: createJobSchema,
 }), async (req, res) => {
     try {
