@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "npx prisma migrate dev",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run db:seed",
     "start": "ts-node index.ts",
     "db:seed": "npx prisma db seed"
   },
