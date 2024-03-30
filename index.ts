@@ -6,7 +6,7 @@ import { db } from './db';
 import { jobsRoutes, translationRoutes } from './api'
 
 const app = express()
-const port = 7777
+const PORT = process.env.PORT ?? 7777
 
 app.use(bodyParser.json())
 
@@ -17,8 +17,8 @@ async function start() {
     app.use('/jobs', jobsRoutes)
     app.use('/translation', translationRoutes)
 
-    app.listen(port, () => {
-        console.log('Project started')
+    app.listen(Number(PORT), '0.0.0.0', () => {
+        console.log(`Project started on port ${PORT}`)
     })
 }
 
