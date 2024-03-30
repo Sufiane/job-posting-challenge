@@ -31,7 +31,8 @@ export async function update(id: number, payload: UpdatePayload): Promise<void> 
 }
 
 export async function deleteJobDescription(id: number): Promise<void> {
-    await db.jobDescription.delete({
+    // work around to handle the deletion of a non-existing record w/o having to make a query to check before
+    await db.jobDescription.deleteMany({
         where: {
             id,
         },
