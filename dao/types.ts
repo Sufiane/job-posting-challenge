@@ -10,10 +10,10 @@ export interface UpdatePayload extends Partial<CreatePayload> {}
 
 export interface CreatePayload {
     text: string
-    isSoft: boolean,
-    isTech: boolean,
-    hasBenefits: boolean,
-    hasResponsibilities: boolean,
-    requireEducation: boolean,
-    requireExperience: boolean,
+    isSoft: boolean
+    isTech: boolean
+    hasBenefits: boolean
+    hasResponsibilities: boolean
+    requireEducation: boolean
+    requireExperience: boolean
 }

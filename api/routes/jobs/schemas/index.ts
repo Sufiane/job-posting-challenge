@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const paramsSchema = z.object({
     id: z.coerce.number(),
@@ -24,9 +24,7 @@ export const getJobsSchema = z.optional(
         hasResponsibilities: z.coerce.boolean().optional(),
         requireEducation: z.coerce.boolean().optional(),
         requireExperience: z.coerce.boolean().optional(),
-        id: z.enum([
-            'asc',
-            'desc',
-        ]).optional(),
+        id: z.enum(['asc', 'desc']).optional(),
         skip: z.coerce.number().optional(),
-    }))
+    })
+)

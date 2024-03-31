@@ -1,5 +1,9 @@
 import { db } from '../db/'
-import { CreatePayload, JobDescription, UpdatePayload } from './types';
+import {
+    type CreatePayload,
+    type JobDescription,
+    type UpdatePayload,
+} from './types'
 
 export const fullSelect = {
     id: true,
@@ -21,7 +25,10 @@ export async function getOne(id: number): Promise<JobDescription | null> {
     })
 }
 
-export async function update(id: number, payload: UpdatePayload): Promise<void> {
+export async function update(
+    id: number,
+    payload: UpdatePayload
+): Promise<void> {
     await db.jobDescription.update({
         data: payload,
         where: {
@@ -45,9 +52,13 @@ export async function create(payload: CreatePayload): Promise<void> {
     })
 }
 
-export async function get({ filtering, sorting, skip }: {
-    skip?: number,
-    sorting?: 'asc' | 'desc',
+export async function get({
+    filtering,
+    sorting,
+    skip,
+}: {
+    skip?: number
+    sorting?: 'asc' | 'desc'
     filtering?: {
         isSoft?: boolean
         isTech?: boolean

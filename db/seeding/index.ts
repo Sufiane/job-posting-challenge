@@ -1,22 +1,24 @@
 import { open } from 'node:fs/promises'
+import path from 'node:path'
 
 import { db } from '../index'
+import { logger } from '../../logger'
 
 interface JsonLine {
     text: string
     cats: {
-        responsibility: number,
-        benefit: number,
-        node: number,
-        education: number,
-        experience: number,
-        soft: number,
-        tech: number,
+        responsibility: number
+        benefit: number
+        node: number
+        education: number
+        experience: number
+        soft: number
+        tech: number
     }
 }
 
-async function seeding() {
-    const fileHandle = await open(__dirname + '/sentences.jsonl')
+async function seeding(): Promise<void> {
+    const fileHandle = await open(path.join(__dirname, '/sentences.jsonl'))
 
     for await (const rawLine of fileHandle.readLines()) {
         const line: JsonLine = JSON.parse(rawLine)
@@ -33,15 +35,14 @@ async function seeding() {
             },
         })
     }
-
 }
 
 void seeding()
     .then(async () => {
-        db.$disconnect()
+        await db.$disconnect()
     })
     .catch(async (e) => {
-        console.error('Error while seeding', e)
+        logger.error('Error while seeding', e)
 
         await db.$disconnect()
 
